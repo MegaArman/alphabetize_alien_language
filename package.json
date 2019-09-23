@@ -1,0 +1,26 @@
+{
+  "name": "alphabetize_alien_language",
+  "version": "1.0.0",
+  "description": "",
+  "main": "alphabetize.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --cache ./lib/*.js tests/*.js",
+    "test": "npm run lint && nyc tape tests/*.js | tap-nyc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MegaArman/alphabetize_alien_language.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MegaArman/alphabetize_alien_language/issues"
+  },
+  "homepage": "https://github.com/MegaArman/alphabetize_alien_language#readme",
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "nyc": "^14.1.1",
+    "tap-nyc": "^1.0.3",
+    "tape": "^4.11.0"
+  }
+}

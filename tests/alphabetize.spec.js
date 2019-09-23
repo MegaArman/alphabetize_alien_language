@@ -19,7 +19,7 @@ test("alphabetize tests", (t) =>
   {
     const actual = alphabetize(["bc", "acb", "abc"]); 
     const expected = ["c", "b", "a"];
-    t.deepEqual(actual, expected, "valid tie and false tie");
+    t.deepEqual(actual, expected, "short word, valid tie and false tie");
   }
 
   {
@@ -39,7 +39,13 @@ test("alphabetize tests", (t) =>
     const expected = ["a", "b", "c"];
     t.deepEqual(actual, expected, "no ties");
   }
-
+   
+  {
+    const actual = alphabetize(["abc", "bca", "cba"]); 
+    const expected = ["a", "b", "c"];
+    t.deepEqual(actual, expected);
+  }
+  
   t.end();
 });
 

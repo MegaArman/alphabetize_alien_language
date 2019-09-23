@@ -5,7 +5,7 @@ const alphabetize = require( "../src/alphabetize.js");
 test("alphabetize tests", (t) =>
 {
   {
-  const actual = alphabetize(["bca", "aaa", "acb"]); 
+   const actual = alphabetize(["bca", "aaa", "acb"]); 
    const expected = ["b", "a", "c"];
    t.deepEqual(actual, expected, "one tie");
   }
@@ -29,7 +29,7 @@ test("alphabetize tests", (t) =>
   }
 
   {
-   const actual = alphabetize(["acb", "abc", "dcb", "cdb"]); 
+    const actual = alphabetize(["acb", "abc", "dcb", "cdb"]); 
     const expected = ["a", "d", "c", "b"];
     t.deepEqual(actual, expected);
   }

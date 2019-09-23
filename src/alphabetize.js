@@ -35,7 +35,7 @@ const alphabetize = (words) =>
           alphabet.splice(pIndex, 1); //delete p
           alphabet.splice(cIndex, 0, p); //insert p before c
         }
-        break;
+        break; 
       }
     }
     

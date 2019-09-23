@@ -3,3 +3,4 @@ npm-debug.log
 *.swp
 .nyc_output
 .eslintcache
+readme.txt

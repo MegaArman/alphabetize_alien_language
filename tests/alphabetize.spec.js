@@ -1,13 +1,13 @@
 "use strict";
 const test = require("tape").test;
-const alphabetize = require( "../lib/alphabetize.js");
+const alphabetize = require( "../src/alphabetize.js");
 
 test("alphabetize tests", (t) =>
 {
   {
-    const actual = alphabetize(["bca", "aaa", "acb"]); 
-    const expected = ["b", "a", "c"];
-    t.deepEqual(actual, expected, "one tie");
+  const actual = alphabetize(["bca", "aaa", "acb"]); 
+   const expected = ["b", "a", "c"];
+   t.deepEqual(actual, expected, "one tie");
   }
 
   {
@@ -29,14 +29,8 @@ test("alphabetize tests", (t) =>
   }
 
   {
-    const actual = alphabetize(["acb", "abc", "dcb", "cdb"]); 
+   const actual = alphabetize(["acb", "abc", "dcb", "cdb"]); 
     const expected = ["a", "d", "c", "b"];
-    t.deepEqual(actual, expected);
-  }
-
-  {
-    const actual = alphabetize(["acb", "abc", "dcb", "ddd"]); 
-    const expected = ["a", "c", "d", "b"];
     t.deepEqual(actual, expected);
   }
 

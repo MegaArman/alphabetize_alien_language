@@ -1,6 +1,6 @@
 "use strict";
 
-const findOrdering = (r) =>
+const sortRelations = (r) =>
 {
   const visited = [];
   const keys = Object.keys(r);
@@ -14,18 +14,16 @@ const findOrdering = (r) =>
       {
         if (!visited.includes(c))
         {
-          visited.push(c);
-          helper(c);
+          visited.push(c); 
+          helper(c); //will visit all descendant
         }
-        delete r[p];
-        stack.push(p);
       });
+      stack.push(p); //visited all descendants
     }
-    else //last letter
+    else //last letter, no descendants
     {
       stack.push(p);
-    }
-    
+    } 
   };
   
   Object.keys(r).forEach((p) =>
@@ -36,15 +34,18 @@ const findOrdering = (r) =>
       helper(p);
     }
   });
-  console.log("stack", stack);
-  console.log("visited", visited);
+
+  return stack.reverse();   
 };
 
 
-//const r = {"b": ["t"], "t": ["a", "d"], "a": ["c"]}; // b t a
-const r = {"t": ["a"], "b": ["t"]};
+//const r = {"b": ["t"], "t": ["d", "a"], "a": ["c"]}; // b t a
+//const r = {"t": ["a"], "b": ["t"]};
+//const r = {"b": ["t"], "t": ["a"]};
+//console.log(Object.keys(r));
+//const v = sortRelations(r);
+//console.log("v", v);
 
-const v = findOrdering(r);
-console.log("v", v);
+module.exports = sortRelations;
 
    

@@ -1,48 +1,10 @@
 "use strict";
 
-//sort based on relations
-
-//notVisited
-//visited is lsit of keys
-const sortRelations = (relations, p, visited = []) =>
-{
-  if (visited.includes(p)) 
-  {
-    return;
-  }
-  else if (!(Object.keys(relations).includes(p)))
-  {
-    visited.push(p);
-    return;
-  }
-  else
-  {
-    visited.push(p);
-    relations[p].forEach((child) =>
-    {   
-      sortRelations(relations, child, visited);
-    }); 
-  }
-
-  return visited;
-};
-
+const sortRelations = require("./sortRelations.js");
 const alphabetize = (words) =>
 {
   const relations = {}; // map of lists, {a => [b,c,d]}
   let prevWord = words[0];
-
-  //words.forEach((word) =>
-  //{
-  //  word.forEach((letter) =>
-  //  {
-  //    if (!relations.has(letter))
-  //    {
-  //      relations.set(letter, []);
-  //    }
-  //  });
-  //});
-
   words.splice(1).forEach((word) =>
   {
     for (let i = 0; i < prevWord.length; i++)
@@ -67,11 +29,9 @@ const alphabetize = (words) =>
     
     prevWord = word;
   });
-  console.log("relations", relations); 
-  const alphabet = sortRelations(relations, Object.keys(relations)[0]); 
+  console.log("relations", relations);
+  const alphabet = sortRelations(relations); 
   return alphabet;
 };
 
-const actual = alphabetize(["ab", "at", "aa"]);
-console.log(actual);
 module.exports = alphabetize;

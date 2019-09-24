@@ -1,0 +1,54 @@
+need way to save relations
+push based on tie case only
+check relations table and swap again
+
+... or simply assemble the relations table in its entirety first, based on the fact we cannot determine a full ordering until we've found all relations 
+
+when we start with the first relation, we don't know where it is in the final ordering. 
+
+if it were the first relation we could traverse all the way through
+
+a-b , b-c, c-d
+
+1) a-b: a-b  , b-c,  c-d 
+2) b-c: b is visited
+3) c-d: c is visited
+
+but what if the first relation was the last in the final ordering:
+c-d, b-c, a-b
+
+1) c-d: c-d
+2) b-c: b not visited, insert. c visited.
+3)
+------
+if the second letter in a relation is not in the relation table, it was the last letter.
+we must go through entire chain and insert, then if next relation is not in current result we 
+go through its chain till we find a prediscovered relation or we find the end relation 
+
+c-d, b-c, a-b => a-b-c-d
+
+c-d : d is last letter - add d, add c
+b-c  : c-d ..c already visited, stop. add b
+a-b: b-c; c already visited.. add a
+
+result is in reverse order
+
+------
+since we have them as maps...
+base cases:
+-c has no relation and is thus the last letter
+-c has been visited
+
+examine first value in list of first key
+
+----
+relations.forEach(p)
+  if p has been visited or relations[p] is empty
+    do nothing..return
+  else 
+    visited push p
+    p.forEach(c) 
+      visited push c
+      sortRelations(relations, c, visited = []) 
+
+    delete p 

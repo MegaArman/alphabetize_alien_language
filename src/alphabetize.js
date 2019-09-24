@@ -1,47 +1,74 @@
 "use strict";
 
+//sort based on relations
+
+//notVisited
+//visited is lsit of keys
+const sortRelations = (relations, p, visited = []) =>
+{
+  if (visited.includes(p)) 
+  {
+    return;
+  }
+  else if (!(Object.keys(relations).includes(p)))
+  {
+    visited.push(p);
+    return;
+  }
+  else
+  {
+    visited.push(p);
+    relations[p].forEach((child) =>
+    {   
+      sortRelations(relations, child, visited);
+    }); 
+  }
+
+  return visited;
+};
+
 const alphabetize = (words) =>
 {
-  const alphabet = [];
+  const relations = {}; // map of lists, {a => [b,c,d]}
+  let prevWord = words[0];
 
-  //step 1 - find letters of the alphabet
-  words.forEach((word) =>
-  { 
-    [...word].forEach((letter) =>
-    {
-      if (!alphabet.includes(letter)) 
-      {
-        alphabet.push(letter);  
-      }
-    });
-  });
- 
-  //step 2 - rearrange the alphabet to get the correct ordering 
-  let prevWord = "";
-  words.forEach((word) =>
+  //words.forEach((word) =>
+  //{
+  //  word.forEach((letter) =>
+  //  {
+  //    if (!relations.has(letter))
+  //    {
+  //      relations.set(letter, []);
+  //    }
+  //  });
+  //});
+
+  words.splice(1).forEach((word) =>
   {
     for (let i = 0; i < prevWord.length; i++)
     {
       const p = prevWord[i];
       const c = word[i];
-
+      
       if (p !== c)
       {
-        const pIndex = alphabet.indexOf(p);
-        const cIndex = alphabet.indexOf(c);
-
-        if (pIndex > cIndex)
+        if (p in Object.keys(relations))
         {
-          alphabet.splice(pIndex, 1); //delete p
-          alphabet.splice(cIndex, 0, p); //insert p before c
+          relations[p].push(c);  //may have duplicates
         }
-        break; 
+        else 
+        {
+          relations[p] = [c]; 
+        }
+       
+       break; 
       }
     }
     
     prevWord = word;
   });
-
+  console.log("relations", relations); 
+  const alphabet = sortRelations(relations, Object.keys(relations)[0]); 
   return alphabet;
 };
 

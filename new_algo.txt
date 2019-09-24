@@ -51,4 +51,14 @@ relations.forEach(p)
       visited push c
       sortRelations(relations, c, visited = []) 
 
-    delete p 
+    delete p
+-----------
+if p is visited
+  return; //this may result in undefineds! 
+if relations[p] empty
+  push p
+  return visited 
+
+look at every p in relations 
+  every c in relations[p]
+      visited gets recursive(relations, c, visited)

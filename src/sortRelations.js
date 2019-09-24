@@ -1,30 +1,50 @@
 "use strict";
 
-const sortRelations = (relations, p, visited = []) =>
+const findOrdering = (r) =>
 {
-  if (visited.includes(p)) 
-  {
-    return;
-  }
-  else if (!(Object.keys(relations).includes(p)))
-  {
-    visited.push(p);
-    return;
-  }
-  else
-  {
-    visited.push(p);
-    relations[p].forEach((child) =>
-    {
-      sortRelations(relations, child, visited);
-    });
-  }
+  const visited = [];
+  const keys = Object.keys(r);
+  const stack = [];
 
-  return visited;
+  const helper = (p) =>
+  {
+    if (keys.includes(p))  //if this vertex has children / succeeding letters 
+    {
+      r[p].forEach((c) =>
+      {
+        if (!visited.includes(c))
+        {
+          visited.push(c);
+          helper(c);
+        }
+        delete r[p];
+        stack.push(p);
+      });
+    }
+    else //last letter
+    {
+      stack.push(p);
+    }
+    
+  };
+  
+  Object.keys(r).forEach((p) =>
+  {
+    if (!visited.includes(p))
+    {
+      visited.push(p);
+      helper(p);
+    }
+  });
+  console.log("stack", stack);
+  console.log("visited", visited);
 };
-//const r = {"b": ["t"], "t": ["a", "c"], "a": ["c"]}; // b t a
-const r = { a: [ 'b' ], d: [ 'a' ] };
-const v = sortRelations(r, Object.keys(r)[0]);
+
+
+//const r = {"b": ["t"], "t": ["a", "d"], "a": ["c"]}; // b t a
+const r = {"t": ["a"], "b": ["t"]};
+
+const v = findOrdering(r);
 console.log("v", v);
 
    

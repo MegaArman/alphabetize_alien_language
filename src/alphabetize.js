@@ -72,4 +72,6 @@ const alphabetize = (words) =>
   return alphabet;
 };
 
+const actual = alphabetize(["ab", "at", "aa"]);
+console.log(actual);
 module.exports = alphabetize;

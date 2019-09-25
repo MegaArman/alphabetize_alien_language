@@ -3,7 +3,8 @@
 const sortRelations = require("./sortRelations.js");
 const alphabetize = (words) =>
 {
-  const relations = {}; // map of lists, {a => [b,c,d]}
+  // relations, map  of lists, {a => [b,c,d]}... (essentially a graph)
+  const relations = new Map();   
   let prevWord = words[0];
   words.splice(1).forEach((word) =>
   {
@@ -14,22 +15,14 @@ const alphabetize = (words) =>
       
       if (p !== c)
       {
-        if (p in Object.keys(relations))
-        {
-          relations[p].push(c);  //may have duplicates
-        }
-        else 
-        {
-          relations[p] = [c]; 
-        }
-       
-       break; 
+        (relations.has(p)) ?
+          relations.get(p).push(c) : relations.set(p, [c]);  
+        break; 
       }
     }
     
     prevWord = word;
   });
-  console.log("relations", relations);
   const alphabet = sortRelations(relations); 
   return alphabet;
 };

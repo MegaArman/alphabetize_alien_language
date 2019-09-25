@@ -17,12 +17,9 @@ const sortRelations = (r) =>
           helper(c); //will visit all descendants
         }
       });
-      stack.push(p); //have visited all descendants
     }
-    else //is last letter, no descendants
-    {
-      stack.push(p);
-    } 
+    //have visited all descendents or has no descendents (last letter):
+    stack.push(p);   
   };
   
   r.forEach((_, p) =>

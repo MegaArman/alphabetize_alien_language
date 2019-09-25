@@ -38,16 +38,8 @@ test("alphabetize tests", (t) =>
     const actual = alphabetize(["a", "b", "c"]); 
     const expected = ["a", "b", "c"];
     t.deepEqual(actual, expected, "no ties");
-  }
-   
-  {
-    const actual = alphabetize(["abc", "bca", "cba"]); 
-    const expected = ["a", "b", "c"];
-    t.deepEqual(actual, expected);
-  }
+  } 
 
-
-  //v2:
   {
     const actual = alphabetize(["ab", "at", "aa"]); 
     const expected = ["b", "t", "a"];

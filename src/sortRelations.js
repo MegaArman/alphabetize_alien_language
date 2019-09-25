@@ -2,7 +2,7 @@
 
 const sortRelations = (r) =>
 {
-  const visited = [];
+  const visited = new Set();
   const stack = [];
 
   const helper = (p) =>
@@ -11,9 +11,9 @@ const sortRelations = (r) =>
     {
       r.get(p).forEach((c) =>
       {
-        if (!visited.includes(c))
+        if (!visited.has(c))
         {
-          visited.push(c); 
+          visited.add(c); 
           helper(c); //will visit all descendants
         }
       });
@@ -27,9 +27,9 @@ const sortRelations = (r) =>
   
   r.forEach((_, p) =>
   {
-    if (!visited.includes(p))
+    if (!visited.has(p))
     {
-      visited.push(p);
+      visited.add(p);
       helper(p);
     }
   });

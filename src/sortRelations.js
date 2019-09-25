@@ -1,20 +1,20 @@
 "use strict";
 
-const sortRelations = (r) =>
+const sortRelations = (relations) =>
 {
   const visited = new Set();
   const stack = [];
 
-  const helper = (p) =>
+  const visitDescendants = (p) =>
   {
-    if (r.has(p))  //if this vertex has children / succeeding letters 
+    if (relations.has(p))  //if this vertex has children / succeeding letters 
     {
-      r.get(p).forEach((c) =>
+      relations.get(p).forEach((c) =>
       {
         if (!visited.has(c))
         {
           visited.add(c); 
-          helper(c); //will visit all descendants
+          visitDescendants(c); //will visit all descendants
         }
       });
     }
@@ -22,12 +22,12 @@ const sortRelations = (r) =>
     stack.push(p);   
   };
   
-  r.forEach((_, p) =>
+  relations.forEach((_, p) =>
   {
     if (!visited.has(p))
     {
       visited.add(p);
-      helper(p);
+      visitDescendants(p);
     }
   });
 

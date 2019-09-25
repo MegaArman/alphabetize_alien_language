@@ -15,8 +15,7 @@ const alphabetize = (words) =>
       
       if (p !== c)
       {
-        (relations.has(p)) ?
-          relations.get(p).push(c) : relations.set(p, [c]);  
+        relations.has(p) ? relations.get(p).push(c) : relations.set(p, [c]);  
         break; 
       }
     }

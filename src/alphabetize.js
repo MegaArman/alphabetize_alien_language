@@ -6,7 +6,7 @@ const alphabetize = (words) =>
   // relations, map  of lists, {a => [b,c,d]}... (essentially a graph)
   const relations = new Map();   
   let prevWord = words[0];
-  words.splice(1).forEach((word) =>
+  words.slice(1).forEach((word) =>
   {
     for (let i = 0; i < prevWord.length; i++)
     {
